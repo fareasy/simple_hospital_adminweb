@@ -13,7 +13,7 @@ UI components used:
 
 <x-lv-layout>
   {{-- Search input and filters --}}
-  <div class="py-4 px-3 pb-0 overflow-auto">
+  <div class="py-4 px-3 pb-0 z-2">
     @include('laravel-views::components.toolbar.toolbar')
   </div>
 

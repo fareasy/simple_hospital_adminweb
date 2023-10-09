@@ -45,73 +45,9 @@
         </style>
     </head>
     <body>
-      <div>
-        <div class="sidebar p-4 bg-primary" id="sidebar">
-          <h4 class="mb-5 text-white">SuperVideo</h4>
-          <li>
-            <a class="text-white" href="/">
-              <i class="bi bi-house mr-2"></i>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="dokter">
-              <i class="bi bi-fire mr-2"></i>
-              Dokter
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-newspaper mr-2"></i>
-              Perawat
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-bicycle mr-2"></i>
-              Ruangan
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-boombox mr-2"></i>
-              Rawat Inap
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-film mr-2"></i>
-              Pasien
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-bookmark mr-2"></i>
-              Booking
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-bookmark mr-2"></i>
-              Diagnosa
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-bookmark mr-2"></i>
-              Obat
-            </a>
-          </li>
-          <li>
-            <a class="text-white" href="#">
-              <i class="bi bi-bookmark mr-2"></i>
-              Pembayaran
-            </a>
-          </li>
-        </div>
-      </div>
+    @include('sidebar')
       <section class="p-4" id="main-content">
-        <button class="btn btn-primary" id="button-toggle">
+        <button class="btn" id="button-toggle" style="color:white;background-color: #5F8D4E">
           <i class="bi bi-list"></i>
         </button>
         <div class="card mt-5">

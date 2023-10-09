@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/dokter', [dokterController::class,'index']);
-
+Route::match(['get', 'post'],'/add-dokter',[dokterController::class,'store'])->name('doctor.add');
 Route::get('/', [dashboardController::class,'index']);
