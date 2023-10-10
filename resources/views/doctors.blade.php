@@ -61,6 +61,11 @@
             <div>
                 @livewire('users-table-view')
             </div>
+              <script>
+              Livewire.onPageExpired((response, message) => {
+	location.reload()
+})
+            </script>
           </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
