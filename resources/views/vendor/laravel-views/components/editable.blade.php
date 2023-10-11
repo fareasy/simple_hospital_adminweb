@@ -5,7 +5,7 @@ Render an editable input field --}}
 
 <div x-data="{
     field: '{{ $field }}',
-    id: {{ $model->NIP_Dokter}},
+    id: {{ $model->ID}},
     value: {{ json_encode(strip_tags($model->$field)) }},
     original: {{ json_encode(strip_tags($model->$field)) }},
     editing: false
@@ -17,7 +17,7 @@ Render an editable input field --}}
     x-show="editing"
     x-model="value"
     @keydown.enter="$wire.update({
-      ['NIP_Dokter']: id
+      ['ID']: id
     }, {
       [field]: value
     }); editing = false; original = value"

@@ -2,28 +2,32 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\dokter;
 use LaravelViews\Views\TableView;
+use App\Models\ruangan;
 use LaravelViews\Facades\Header;
-use App\Filters\Filterspesialisasidokter;
+use App\Filters\Filterjenisruangan;
+use App\Filters\Filterstatusruangan;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
 use App\Actions\DeletedokterAction;
+use App\Actions\StatusruanganAction;
 use Illuminate\Database\QueryException;
 
-class UsersTableView extends TableView
+class ruanganTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = dokter::class;
+    protected $model = ruangan::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Dokter','Bidang_Spesialisasi'];
+    public $searchBy = ['ID','Jenis_Ruangan','Kapasitas_Ruangan','Status'];
+
     protected function filters()
     {
         return [
-            new Filterspesialisasidokter,
+            new Filterjenisruangan,
+            new Filterstatusruangan
         ];
     }
 
@@ -35,15 +39,11 @@ class UsersTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title('NIP')->sortBy('ID'),
-            Header::title('Nama')->sortBy('Nama_Dokter'),
-            Header::title('Tanggal Lahir')->sortBy('Tanggal_Lahir'),
-            Header::title('Jenis Kelamin')->sortBy('Jenis_Kelamin'),
-        'Alamat',
-        'No HP',
-        Header::title('Bidang Spesialisasi')->sortBy('Bidang_Spesialisasi')
+            Header::title('ID Ruangan')->sortBy('ID'),
+            Header::title('Jenis Ruangan')->sortBy('Jenis_Ruangan'),
+            Header::title('Kapasitas')->sortBy('Kapasitas_Ruangan'),
+            Header::title('Status')->sortBy('Status')
     ];
-        
     }
 
     /**
@@ -53,16 +53,15 @@ class UsersTableView extends TableView
      */
     public function row($model): array
     {
+        $status=($model->Status == 'Penuh')?UI::badge($model->Status, 'danger'):UI::badge($model->Status, 'success');
         return [
             $model->ID,
-            UI::editable($model, 'Nama_Dokter'),
-            $model->Tanggal_Lahir,
-            $model->Jenis_Kelamin,
-            UI::editable($model, 'Alamat'),
-            UI::editable($model, 'No_HP'),
-            $model->Bidang_Spesialisasi
+            $model->Jenis_Ruangan,
+            UI::editable($model, 'Kapasitas_Ruangan'),
+            $status
         ];
     }
+
     use WithAlerts;
     
     public function update($model, $data)
@@ -70,7 +69,7 @@ class UsersTableView extends TableView
 
         try {
             // Your code that may cause a QueryException
-            $model = dokter::where($model)->update($data);
+            $model = ruangan::where($model)->update($data);
             $this->success();
         } catch (QueryException $e) {
             // Handle the exception here
@@ -83,7 +82,8 @@ class UsersTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new DeletedokterAction
+            new StatusruanganAction,
+            new DeletedokterAction,
         ];
     }
 }

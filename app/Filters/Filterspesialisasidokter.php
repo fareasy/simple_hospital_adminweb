@@ -5,7 +5,7 @@ namespace App\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 
-class FilterBidangSpesialisasi extends Filter
+class Filterspesialisasidokter extends Filter
 {
     /**
      * Modify the current query when the filter is used

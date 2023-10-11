@@ -2,30 +2,32 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\dokter;
 use LaravelViews\Views\TableView;
+use App\Models\perawat;
 use LaravelViews\Facades\Header;
-use App\Filters\Filterspesialisasidokter;
+use App\Filters\Filterspesialisasiperawat;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
 use App\Actions\DeletedokterAction;
 use Illuminate\Database\QueryException;
 
-class UsersTableView extends TableView
+class perawatTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = dokter::class;
+    protected $model = perawat::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Dokter','Bidang_Spesialisasi'];
+    public $searchBy = ['ID','Nama_Perawat','Bidang_Spesialisasi'];
+
     protected function filters()
     {
         return [
-            new Filterspesialisasidokter,
+            new Filterspesialisasiperawat,
         ];
     }
+
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -36,14 +38,13 @@ class UsersTableView extends TableView
     {
         return [
             Header::title('NIP')->sortBy('ID'),
-            Header::title('Nama')->sortBy('Nama_Dokter'),
+            Header::title('Nama')->sortBy('Nama_Perawat'),
             Header::title('Tanggal Lahir')->sortBy('Tanggal_Lahir'),
             Header::title('Jenis Kelamin')->sortBy('Jenis_Kelamin'),
         'Alamat',
         'No HP',
         Header::title('Bidang Spesialisasi')->sortBy('Bidang_Spesialisasi')
     ];
-        
     }
 
     /**
@@ -55,7 +56,7 @@ class UsersTableView extends TableView
     {
         return [
             $model->ID,
-            UI::editable($model, 'Nama_Dokter'),
+            UI::editable($model, 'Nama_Perawat'),
             $model->Tanggal_Lahir,
             $model->Jenis_Kelamin,
             UI::editable($model, 'Alamat'),
@@ -70,7 +71,7 @@ class UsersTableView extends TableView
 
         try {
             // Your code that may cause a QueryException
-            $model = dokter::where($model)->update($data);
+            $model = perawat::where($model)->update($data);
             $this->success();
         } catch (QueryException $e) {
             // Handle the exception here

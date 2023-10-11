@@ -14,49 +14,49 @@
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="perawat">
                     <i class="bi bi-person mr-2"></i>
                   Perawat
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="ruangan">
                   <i class="bi bi-journal mr-2"></i>
                   Ruangan
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="rawat-inap">
                     <i class="bi bi-hospital mr-2"></i>
                   Rawat Inap
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="pasien">
                     <i class="bi bi-person mr-2"></i>
                   Pasien
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="booking">
                   <i class="bi bi-bookmark mr-2"></i>
                   Booking
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="diagnosa">
                     <i class="bi bi-file-medical mr-2"></i>
                   Diagnosa
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="obat">
                     <i class="bi bi-capsule mr-2"></i>
                   Obat
                 </a>
               </li>
               <li>
-                <a class="text-white" href="#">
+                <a class="text-white" href="pembayaran">
                     <i class="bi bi-bank2 mr-2"></i>
                   Pembayaran
                 </a>

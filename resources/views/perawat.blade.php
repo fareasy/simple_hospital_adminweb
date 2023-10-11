@@ -53,13 +53,13 @@
           </section>
           <section class="container-fluid overflow-hidden p-5">
             <div class="row align-items-center">
-            <h1 class='m-3 col' style="font-size: 36px">Daftar Dokter</h1>
+            <h1 class='m-3 col' style="font-size: 36px">Daftar Perawat</h1>
             <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn col-auto btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
             <i class="bi bi-person-fill-add mr-2"></i>
             Tambah Baru</button>
             </div>
             <div>
-                @livewire('users-table-view')
+                @livewire('perawat-table-view')
             </div>
               <script>
               Livewire.onPageExpired((response, message) => {
@@ -71,13 +71,13 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah dokter baru</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah perawat baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="container-fluid" method="post" action="{{route('doctor.add')}}">
+        <form class="container-fluid" method="post" action="{{route('perawat.add')}}">
           @csrf
           <div class="row">
             <div class="form-group col">
@@ -85,8 +85,8 @@
               <input type="text" class="form-control" id="ID" name="ID">
             </div>
             <div class="form-group col">
-              <label for="Nama_Dokter">Nama Lengkap</label>
-              <input type="text" class="form-control" id="Nama_Dokter" name="Nama_Dokter">
+              <label for="Nama_Perawat">Nama Lengkap</label>
+              <input type="text" class="form-control" id="Nama_Perawat" name="Nama_Perawat">
             </div>
           </div>
           <div class="row mt-3">
@@ -117,13 +117,9 @@
             <div class="form-group col">
               <label for="Bidang_Spesialisasi">Bidang Spesialisasi</label>
               <select name="Bidang_Spesialisasi" id="Bidang_Spesialisasi" class="form-control">
-                <option value="Spesialis Saraf">Spesialis Saraf</option>
-                <option value="Spesialis Radiologi">Spesialis Radiologi</option>
-                <option value="Spesialis Kedokteran Jiwa">Spesialis Kedokteran Jiwa</option>
-                <option value="Spesialis Anestesi">Spesialis Anestesi</option>
-                <option value="Psikolog">Psikolog</option>
-                <option value="Dokter Umum">Dokter Umum</option>
-                <option value="Dokter Gigi">Dokter Gigi</option>
+                <option value="Keperawatan Jiwa">Keperawatan Jiwa</option>
+                <option value="Keperawatan Anak">Keperawatan Anak</option>
+                <option value="Tidak Ada">Tidak Ada</option>
               </select>
             </div>
           </div>

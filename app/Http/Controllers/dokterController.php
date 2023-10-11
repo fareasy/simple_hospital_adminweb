@@ -35,7 +35,7 @@ class dokterController extends Controller
     {
         // Validate the form data
         $request->validate([
-            'NIP_Dokter' => 'required|max:15',
+            'ID' => 'required|max:15',
             'Nama_Dokter' => 'required|string|max:100',
             'Tanggal_Lahir' => 'required',
             'Jenis_Kelamin' => 'required',

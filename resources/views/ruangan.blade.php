@@ -53,13 +53,13 @@
           </section>
           <section class="container-fluid overflow-hidden p-5">
             <div class="row align-items-center">
-            <h1 class='m-3 col' style="font-size: 36px">Daftar Dokter</h1>
+            <h1 class='m-3 col' style="font-size: 36px">Daftar Ruangan</h1>
             <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn col-auto btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
             <i class="bi bi-person-fill-add mr-2"></i>
             Tambah Baru</button>
             </div>
             <div>
-                @livewire('users-table-view')
+                @livewire('ruangan-table-view')
             </div>
               <script>
               Livewire.onPageExpired((response, message) => {
@@ -71,59 +71,40 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah dokter baru</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah ruangan baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="container-fluid" method="post" action="{{route('doctor.add')}}">
+        <form class="container-fluid" method="post" action="{{route('ruangan.add')}}">
           @csrf
           <div class="row">
             <div class="form-group col">
-              <label for="ID">NIP</label>
+              <label for="ID">ID</label>
               <input type="text" class="form-control" id="ID" name="ID">
             </div>
             <div class="form-group col">
-              <label for="Nama_Dokter">Nama Lengkap</label>
-              <input type="text" class="form-control" id="Nama_Dokter" name="Nama_Dokter">
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="form-group col">
-              <label for="Tanggal_Lahir">Tanggal Lahir</label>
-              <input type="text" class="form-control" id="Tanggal_Lahir" name="Tanggal_Lahir" placeholder="YYYY-MM-DD" required pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
-            </div>
-            <div class="form-group col">
-              <label for="Jenis_Kelamin">Jenis Kelamin</label>
-              <select name="Jenis_Kelamin" id="Jenis_Kelamin" class="form-control">
-                <option value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
+              <label for="Jenis_Ruangan">Jenis Ruangan</label>
+              <select name="Jenis_Ruangan" id="Jenis_Ruangan" class="form-control">
+                <option value="Ruang PICU">Ruang PICU</option>
+                <option value="Ruang Cendrawasih">Ruang Cendrawasih</option>
+                <option value="Ruang Melati">Ruang Melati</option>
+                <option value="Ruang Kutilang">Ruang Kutilang</option>
+                <option value="Ruang NAPZA">Ruang NAPZA</option>
               </select>
             </div>
           </div>
           <div class="row mt-3">
             <div class="form-group col">
-              <label for="Alamat">Alamat</label>
-              <input type="text" class="form-control" id="Alamat" name="Alamat">
+              <label for="Kapasitas_Ruangan">Kapasitas Ruangan</label>
+              <input type="number" class="form-control" id="Kapasitas_Ruangan" name="Kapasitas_Ruangan" min="1" max="25"/>
             </div>
             <div class="form-group col">
-              <label for="No_HP">No. HP</label>
-              <input type="text" id="No_HP" name="No_HP" class="form-control"
-              placeholder="08xxxxxxxxxxx" pattern="[0-9]{10,13}">
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="form-group col">
-              <label for="Bidang_Spesialisasi">Bidang Spesialisasi</label>
-              <select name="Bidang_Spesialisasi" id="Bidang_Spesialisasi" class="form-control">
-                <option value="Spesialis Saraf">Spesialis Saraf</option>
-                <option value="Spesialis Radiologi">Spesialis Radiologi</option>
-                <option value="Spesialis Kedokteran Jiwa">Spesialis Kedokteran Jiwa</option>
-                <option value="Spesialis Anestesi">Spesialis Anestesi</option>
-                <option value="Psikolog">Psikolog</option>
-                <option value="Dokter Umum">Dokter Umum</option>
-                <option value="Dokter Gigi">Dokter Gigi</option>
+              <label for="Status">Status</label>
+              <select name="Status" id="Status" class="form-control">
+                <option value="Tersedia">Tersedia</option>
+                <option value="Penuh">Penuh</option>
               </select>
             </div>
           </div>
