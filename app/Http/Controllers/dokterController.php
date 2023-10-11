@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dokter;
+use LaravelViews\Views\Traits\WithAlerts;
 
 class dokterController extends Controller
 {
@@ -32,7 +33,24 @@ class dokterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the form data
+        $request->validate([
+            'NIP_Dokter' => 'required|max:15',
+            'Nama_Dokter' => 'required|string|max:100',
+            'Tanggal_Lahir' => 'required',
+            'Jenis_Kelamin' => 'required',
+            'Alamat' => 'required|string|max:250',
+            'No_HP' => 'required',
+            'Bidang_Spesialisasi' => 'required',
+        ]);
+
+        // Save the form data to the database
+        $model = dokter::create($request->all());
+        if (!$model) {
+            \Log::info('Request data', ['attributes' => $request->all()]);
+            \Log::error('Failed to save dokter', ['attributes' => $request->all()]);
+        }
+        return redirect('/dokter');
     }
 
     /**

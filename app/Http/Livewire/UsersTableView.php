@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use App\Filters\FilterBidangSpesialisasi;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
+use App\Actions\DeleteUserAction;
+use Illuminate\Database\QueryException;
 
 class UsersTableView extends TableView
 {
@@ -57,7 +59,7 @@ class UsersTableView extends TableView
             $model->Tanggal_Lahir,
             $model->Jenis_Kelamin,
             UI::editable($model, 'Alamat'),
-            $model->No_HP,
+            UI::editable($model, 'No_HP'),
             $model->Bidang_Spesialisasi
         ];
     }
@@ -65,7 +67,23 @@ class UsersTableView extends TableView
     
     public function update($model, $data)
     {
-        $model = dokter::where($model)->update($data);
-        $this->success();
+
+        try {
+            // Your code that may cause a QueryException
+            $model = dokter::where($model)->update($data);
+            $this->success();
+        } catch (QueryException $e) {
+            // Handle the exception here
+            // You can get details about the exception using $e->getMessage(), $e->getCode(), etc.
+            $this->error("There has been a mistake. Please refresh the page.");
+            }
+        }
+    
+
+    protected function actionsByRow()
+    {
+        return [
+            new DeleteUserAction
+        ];
     }
 }
