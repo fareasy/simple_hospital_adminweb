@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\dokterController;
 use App\Http\Controllers\perawatController;
 use App\Http\Controllers\ruanganController;
+use App\Http\Controllers\pasienController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,8 @@ Route::match(['get', 'post'],'/add-perawat',[perawatController::class,'store'])-
 
 Route::get('/ruangan', [ruanganController::class,'index']);
 Route::match(['get', 'post'],'/add-ruangan',[ruanganController::class,'store'])->name('ruangan.add');
+
+Route::get('/pasien', [pasienController::class,'index']);
+Route::match(['get', 'post'],'/add-pasien',[pasienController::class,'store'])->name('pasien.add');
 
 Route::get('/', [dashboardController::class,'index']);

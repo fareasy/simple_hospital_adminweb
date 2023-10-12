@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dokter;
-use LaravelViews\Views\Traits\WithAlerts;
 
 class dokterController extends Controller
 {
