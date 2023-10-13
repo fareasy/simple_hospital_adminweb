@@ -26,7 +26,7 @@
                 </a>
               </li>
               <li>
-                <a class="text-white" href="rawat-inap">
+                <a class="text-white" href="rawat_inap">
                     <i class="bi bi-hospital mr-2"></i>
                   Rawat Inap
                 </a>

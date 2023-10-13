@@ -59,6 +59,7 @@
             Tambah Baru</button>
             </div>
             <div>
+            @csrf
                 @livewire('perawat-table-view')
             </div>
               <script>

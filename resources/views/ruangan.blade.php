@@ -59,6 +59,7 @@
             Tambah Baru</button>
             </div>
             <div>
+            @csrf
                 @livewire('ruangan-table-view')
             </div>
               <script>

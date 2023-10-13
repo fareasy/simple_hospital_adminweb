@@ -53,14 +53,14 @@
           </section>
           <section class="container-fluid overflow-hidden p-5">
             <div class="row align-items-center">
-            <h1 class='m-3 col' style="font-size: 36px">Daftar Pasien</h1>
+            <h1 class='m-3 col' style="font-size: 36px">Daftar Rawat Inap</h1>
             <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn col-auto btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
             <i class="bi bi-person-fill-add mr-2"></i>
             Tambah Baru</button>
             </div>
             <div>
             @csrf
-                @livewire('pasien-table-view')
+                @livewire('rawatinap-table-view')
             </div>
               <script>
               Livewire.onPageExpired((response, message) => {
@@ -72,13 +72,13 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah pasien baru</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah rawat inap baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="container-fluid" method="post" action="{{route('pasien.add')}}">
+        <form class="container-fluid" method="post" action="{{route('rawatinap.add')}}">
           @csrf
           <div class="row">
             <div class="form-group col">
@@ -86,34 +86,34 @@
               <input type="text" class="form-control" id="ID" name="ID">
             </div>
             <div class="form-group col">
-              <label for="Nama">Nama Lengkap</label>
-              <input type="text" class="form-control" id="Nama" name="Nama">
+              <label for="ID_Pasien">Nama Pasien</label>
+              <select name="ID_Pasien" class="form-control">
+                @foreach($pasien_id as $ID => $Nama)
+                    <option value="{{ $ID }}">{{ $Nama }}, {{ $ID }}</option>
+                @endforeach
+            </select>
             </div>
           </div>
           <div class="row mt-3">
-            <div class="form-group col">
-              <label for="Tanggal_Lahir">Tanggal Lahir</label>
-              <input type="text" class="form-control" id="Tanggal_Lahir" name="Tanggal_Lahir" placeholder="YYYY-MM-DD" required pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
+          <div class="form-group col">
+              <label for="ID_Ruangan">Nama Ruangan</label>
+              <select name="ID_Ruangan" class="form-control">
+                @foreach($ruangan_id as $ID => $Jenis_Ruangan)
+                    <option value="{{ $ID }}">{{ $Jenis_Ruangan }}, {{ $ID }}</option>
+                @endforeach
+            </select>
             </div>
             <div class="form-group col">
-              <label for="Jenis_Kelamin">Jenis Kelamin</label>
-              <select name="Jenis_Kelamin" id="Jenis_Kelamin" class="form-control">
-                <option value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
-              </select>
+            <label for="Tanggal_Masuk">Tanggal Masuk</label>
+              <input type="text" class="form-control" id="Tanggal_Masuk" name="Tanggal_Masuk" placeholder="YYYY-MM-DD" required pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
             </div>
           </div>
           <div class="row mt-3">
-            <div class="form-group col">
-              <label for="Alamat">Alamat</label>
-              <input type="text" class="form-control" id="Alamat" name="Alamat">
+          <div class="form-group col">
+              <label for="Tanggal_Keluar">Tanggal Keluar</label>
+              <input type="text" class="form-control" id="Tanggal_Keluar" name="Tanggal_Keluar" placeholder="YYYY-MM-DD" pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
             </div>
-            <div class="form-group col">
-              <label for="Kontak_Darurat">Kontak Darurat</label>
-              <input type="text" id="Kontak_Darurat" name="Kontak_Darurat" class="form-control"
-              placeholder="08xxxxxxxxxxx" pattern="[0-9]{10,13}">
-            </div>
-          </div>
+            <div class="form-group col"></div>
           <button type="submit" class="btn form-control mt-3"style="background-color: #5F8D4E;color:white">Submit</button>
         </form>
       </div>
