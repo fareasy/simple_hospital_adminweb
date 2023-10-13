@@ -6,6 +6,8 @@ use App\Http\Controllers\perawatController;
 use App\Http\Controllers\ruanganController;
 use App\Http\Controllers\pasienController;
 use App\Http\Controllers\rawatinapController;
+use App\Http\Controllers\obatController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,5 +35,11 @@ Route::match(['get', 'post'],'/add-pasien',[pasienController::class,'store'])->n
 
 Route::get('/rawat_inap', [rawatinapController::class,'index']);
 Route::match(['get', 'post'],'/add-ri',[rawatinapController::class,'store'])->name('rawatinap.add');
+
+Route::get('/obat', [obatController::class,'index']);
+Route::match(['get', 'post'],'/add-obat',[obatController::class,'store'])->name('obat.add');
+
+Route::get('/transaksi', [transaksiController::class,'index']);
+Route::match(['get', 'post'],'/add-transaksi',[transaksiController::class,'store'])->name('transaksi.add');
 
 Route::get('/', [dashboardController::class,'index']);

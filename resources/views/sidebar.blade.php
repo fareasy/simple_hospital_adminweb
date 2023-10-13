@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li>
-                <a class="text-white" href="pembayaran">
+                <a class="text-white" href="transaksi">
                     <i class="bi bi-bank2 mr-2"></i>
                   Pembayaran
                 </a>
