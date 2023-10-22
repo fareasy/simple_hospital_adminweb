@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dokter;
+use App\Models\spesialisasi_dokter;
+use Carbon\Carbon;
 
 class dokterController extends Controller
 {
@@ -13,10 +15,13 @@ class dokterController extends Controller
     public function index()
     {
         $doctors=dokter::class;
+        $spesialisasi = spesialisasi_dokter::pluck('Bidang_Spesialisasi', 'ID');
         return view('doctors',
-    [
-        'doctors'=>$doctors
-    ]);
+    
+        [
+            'spesialisasi'=>$spesialisasi
+        ]
+    );
     }
 
     /**
@@ -40,11 +45,23 @@ class dokterController extends Controller
             'Jenis_Kelamin' => 'required',
             'Alamat' => 'required|string|max:250',
             'No_HP' => 'required',
-            'Bidang_Spesialisasi' => 'required',
+            'ID_Spesialisasi' => 'required',
         ]);
 
+        $tanggal_lahir = Carbon::parse($request->input('Tanggal_Lahir'))->format('Y-m-d');
+
         // Save the form data to the database
-        $model = dokter::create($request->all());
+        $model = dokter::create(
+            [
+                'ID' => $request->input('ID'),
+            'Nama_Dokter' => $request->input('Nama_Dokter'),
+            'Tanggal_Lahir' => $tanggal_lahir,
+            'Alamat' => $request->input('Alamat'),
+            'Jenis_Kelamin' => $request->input('Jenis_Kelamin'),
+            'No_HP' => $request->input('No_HP'),
+            'ID_Spesialisasi' => $request->input('ID_Spesialisasi'),
+            ]
+        );
         if (!$model) {
             \Log::info('Request data', ['attributes' => $request->all()]);
             \Log::error('Failed to save dokter', ['attributes' => $request->all()]);

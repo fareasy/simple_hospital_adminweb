@@ -54,26 +54,52 @@
           <section class="container-fluid overflow-hidden p-5">
             <div class="row align-items-center">
             <h1 class='m-3 col' style="font-size: 36px">Daftar Perawat</h1>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn col-auto btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
-            <i class="bi bi-person-fill-add mr-2"></i>
-            Tambah Baru</button>
+            <div class='col-auto'>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#specModal" id="create-form" class="btn btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
+                <i class="bi bi-plus mr-2"></i>
+                Tambah Spesialisasi</button>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
+              <i class="bi bi-person-fill-add mr-2"></i>
+              Tambah Baru</button>
+            </div>
             </div>
             <div>
             @csrf
                 @livewire('perawat-table-view')
             </div>
-              <script>
-              Livewire.onPageExpired((response, message) => {
-	location.reload()
-})
-            </script>
           </section>
+
+<div class="modal fade" id="specModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah spesialisasi baru</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="container-fluid" method="post" action="{{route('spesialisasip.add')}}">
+          @csrf
+          <div class="row">
+            <div class="form-group col">
+              <label for="Bidang_Spesialisasi">Bidang Spesialisasi</label>
+              <input type="text" class="form-control" id="Bidang_Spesialisasi" name="Bidang_Spesialisasi">
+            </div>
+          </div>
+          <button type="submit" class="btn form-control mt-3"style="background-color: #5F8D4E;color:white">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Tambah perawat baru</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -93,7 +119,7 @@
           <div class="row mt-3">
             <div class="form-group col">
               <label for="Tanggal_Lahir">Tanggal Lahir</label>
-              <input type="text" class="form-control" id="Tanggal_Lahir" name="Tanggal_Lahir" placeholder="YYYY-MM-DD" required pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
+              <input type="date" class="form-control" id="Tanggal_Lahir" name="Tanggal_Lahir" required/>
             </div>
             <div class="form-group col">
               <label for="Jenis_Kelamin">Jenis Kelamin</label>
@@ -116,11 +142,11 @@
           </div>
           <div class="row mt-3">
             <div class="form-group col">
-              <label for="Bidang_Spesialisasi">Bidang Spesialisasi</label>
-              <select name="Bidang_Spesialisasi" id="Bidang_Spesialisasi" class="form-control">
-                <option value="Keperawatan Jiwa">Keperawatan Jiwa</option>
-                <option value="Keperawatan Anak">Keperawatan Anak</option>
-                <option value="Tidak Ada">Tidak Ada</option>
+              <label for="ID_Spesialisasi">Bidang Spesialisasi</label>
+              <select name="ID_Spesialisasi" id="ID_Spesialisasi" class="form-control">
+                @foreach($spesialisasi as $ID => $Bidang_Spesialisasi)
+                    <option value="{{ $ID }}">{{ $ID }}. {{ $Bidang_Spesialisasi }}</option>
+                @endforeach
               </select>
             </div>
           </div>

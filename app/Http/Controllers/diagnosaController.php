@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\diagnosa;
 use App\Models\obat;
 
-class obatController extends Controller
+class diagnosaController extends Controller
 {
-    //
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $obat=obat::class;
-        return view('obat',
-    [
-        'obat'=>$obat
-    ]);
+        $obat = obat::pluck('Nama_Obat', 'ID');
+        return view('diagnosa',
+        [
+            'obat'=>$obat,
+        ]
+    );
     }
 
     /**
@@ -32,19 +37,32 @@ class obatController extends Controller
     {
         // Validate the form data
         $request->validate([
-            'ID' => 'required|max:15',
-            'Nama_Obat' => 'required|string|max:100',
-            'Deskripsi_Obat' => 'required',
-            'Harga'=> 'required',
+            'Tanggal_Diagnosa' => 'required',
+            'Nama_Diagnosa' => 'required',
+            'Deskripsi_Diagnosa' => 'required',
+            'Tindakan_Medis_Yang_Dibutuhkan' => 'required',
+            'ID_Obat' => 'required',
+            'Jumlah_Obat' => 'required',
         ]);
 
+        $tanggal_diagnosa = Carbon::parse($request->input('Tanggal_Diagnosa'))->format('Y-m-d');
+
         // Save the form data to the database
-        $model = obat::create($request->all());
+        $model = diagnosa::create(
+            [
+            'Tanggal_Diagnosa' => $tanggal_diagnosa,
+            'Nama_Diagnosa' => $request->input('Nama_Diagnosa'),
+            'Deskripsi_Diagnosa' => $request->input('Deskripsi_Diagnosa'),
+            'Tindakan_Medis_Yang_Dibutuhkan' => $request->input('Tindakan_Medis_Yang_Dibutuhkan'),
+            'ID_Obat' => $request->input('ID_Obat'),
+            'Jumlah_Obat' => $request->input('Jumlah_Obat'),
+            ]
+        );
         if (!$model) {
             \Log::info('Request data', ['attributes' => $request->all()]);
             \Log::error('Failed to save dokter', ['attributes' => $request->all()]);
         }
-        return redirect('/obat');
+        return redirect('/diagnosa');
     }
 
     /**

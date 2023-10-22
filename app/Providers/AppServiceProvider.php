@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\rawat_inap;
+use App\Observers\rawatinapObserver;
 use Illuminate\Support\ServiceProvider;
+use App\Models\booking;
+use App\Observers\bookingtagihanObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        booking::observe(bookingtagihanObserver::class);
+        rawat_inap::observe(rawatinapObserver::class);
     }
 }

@@ -3,22 +3,31 @@
 namespace App\Http\Livewire;
 
 use LaravelViews\Views\TableView;
-use App\Models\obat;
+use App\Models\daftar_tagihan;
+use App\Models\pasien;
 use LaravelViews\Facades\Header;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
 use App\Actions\DeletedokterAction;
 use Illuminate\Database\QueryException;
 
-class obatTableView extends TableView
+class daftartagihanTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = obat::class;
+    protected $model = daftar_tagihan::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Obat','Deskripsi_Obat'];
+    public $searchBy = ['ID','ID_Pasien'];
+    /*
+    protected function filters()
+    {
+        return [
+            new Filterspesialisasiperawat,
+        ];
+    }
+    */
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -29,9 +38,12 @@ class obatTableView extends TableView
     {
         return [
             Header::title('ID')->sortBy('ID'),
-            Header::title('Nama Obat')->sortBy('Nama_Obat'),
-            Header::title('Deskripsi Obat')->sortBy('Deskripsi_Obat'),
-            Header::title('Harga')->sortBy('Harga')
+            Header::title('ID Pasien')->sortBy('ID_Pasien'),
+            'Nama Pasien',
+            Header::title('ID Rawat Inap')->sortBy('ID_Rawat_Inap '),
+            Header::title('ID Booking')->sortBy('ID_Booking'),
+        'Harga',
+        'Status'
     ];
     }
 
@@ -42,11 +54,15 @@ class obatTableView extends TableView
      */
     public function row($model): array
     {
+        $pasien = pasien::where('ID', $model->ID_Pasien)->first();
         return [
             $model->ID,
-            UI::editable($model, 'Nama_Obat'),
-            UI::editable($model, 'Deskripsi_Obat'),
-            UI::editable($model, 'Harga')
+            $model->ID_Pasien,
+            $pasien->Nama,
+            $model->ID_Rawat_Inap,
+            $model->ID_Booking,
+            $model->Harga,
+            $model->Status
         ];
     }
     use WithAlerts;
@@ -56,7 +72,7 @@ class obatTableView extends TableView
 
         try {
             // Your code that may cause a QueryException
-            $model = obat::where($model)->update($data);
+            $model = daftar_tagihan::where($model)->update($data);
             $this->success();
         } catch (QueryException $e) {
             // Handle the exception here

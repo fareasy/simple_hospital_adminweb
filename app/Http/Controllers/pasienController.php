@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pasien;
+use Carbon\Carbon;
 
 class pasienController extends Controller
 {
@@ -28,8 +29,17 @@ class pasienController extends Controller
             'Kontak_Darurat' => 'required',
         ]);
 
+        $tanggal_lahir = Carbon::parse($request->input('Tanggal_Lahir'))->format('Y-m-d');
+
         // Save the form data to the database
-        $model = pasien::create($request->all());
+        $model = pasien::create([
+            'ID' => $request->input('ID'),
+        'Nama' => $request->input('Nama'),
+        'Tanggal_Lahir' => $tanggal_lahir,
+        'Alamat' => $request->input('Alamat'),
+        'Jenis_Kelamin' => $request->input('Jenis_Kelamin'),
+        'Kontak_Darurat' => $request->input('Kontak_Darurat'),
+        ]);
         if (!$model) {
             \Log::info('Request data', ['attributes' => $request->all()]);
             \Log::error('Failed to save dokter', ['attributes' => $request->all()]);

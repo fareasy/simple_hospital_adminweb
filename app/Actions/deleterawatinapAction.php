@@ -2,12 +2,12 @@
 
 namespace App\Actions;
 
-use Illuminate\Database\QueryException;
+use App\Events\statusruanganEvent;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 use LaravelViews\Actions\Confirmable;
 
-class DeleteDokterAction extends Action
+class DeleterawatinapAction extends Action
 {
     public function getConfirmationMessage($item = null)
 {
@@ -35,14 +35,8 @@ class DeleteDokterAction extends Action
     public function handle($model, View $view)
     {
         // Your code here
-        try {
-            // Your code that may cause a QueryException
-            $model->delete();
-            $this->success();
-        } catch (QueryException $e) {
-            // Handle the exception here
-            // You can get details about the exception using $e->getMessage(), $e->getCode(), etc.
-            $this->error("There has been a mistake. Please refresh the page.");
-            }
+        $model->delete();
+        event(new statusruanganEvent());
+        redirect('rawat_inap');
     }
 }

@@ -73,7 +73,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Tambah obat baru</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -94,6 +94,10 @@
             <div class="form-group col">
               <label for="Deskripsi_Obat">Deskripsi Obat</label>
               <input type="text" class="form-control" id="Deskripsi_Obat" name="Deskripsi_Obat">
+            </div>
+            <div class="form-group col">
+              <label for="Harga">Harga</label>
+              <input type="number" class="form-control" id="Harga" name="Harga">
             </div>
           </div>
           <button type="submit" class="btn form-control mt-3"style="background-color: #5F8D4E;color:white">Submit</button>

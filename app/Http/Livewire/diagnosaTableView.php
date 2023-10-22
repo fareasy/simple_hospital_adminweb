@@ -3,22 +3,22 @@
 namespace App\Http\Livewire;
 
 use LaravelViews\Views\TableView;
-use App\Models\obat;
+use App\Models\diagnosa;
 use LaravelViews\Facades\Header;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
 use App\Actions\DeletedokterAction;
 use Illuminate\Database\QueryException;
 
-class obatTableView extends TableView
+class diagnosaTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = obat::class;
+    protected $model = diagnosa::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Obat','Deskripsi_Obat'];
+    public $searchBy = ['ID','Nama_Diagnosa','Deskripsi_Diagnosa','Tindakan_Medis_Yang_Dibutuhkan'];
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -29,9 +29,12 @@ class obatTableView extends TableView
     {
         return [
             Header::title('ID')->sortBy('ID'),
-            Header::title('Nama Obat')->sortBy('Nama_Obat'),
-            Header::title('Deskripsi Obat')->sortBy('Deskripsi_Obat'),
-            Header::title('Harga')->sortBy('Harga')
+            Header::title('Tanggal Diagnosa')->sortBy('Tanggal_Diagnosa'),
+            Header::title('Nama Diagnosa')->sortBy('Nama_Diagnosa'),
+            Header::title('Deskripsi Diagnosa')->sortBy('Deskripsi_Diagnosa'),
+            Header::title('Tindakan Medis Yang Dibutuhkan')->sortBy('Tindakan_Medis_Yang_Dibutuhkan'),
+            Header::title('ID Obat')->sortBy('ID_Obat'),
+            Header::title('Jumlah Obat')->sortBy('Jumlah_Obat'),
     ];
     }
 
@@ -44,9 +47,12 @@ class obatTableView extends TableView
     {
         return [
             $model->ID,
-            UI::editable($model, 'Nama_Obat'),
-            UI::editable($model, 'Deskripsi_Obat'),
-            UI::editable($model, 'Harga')
+            $model->Tanggal_Diagnosa,
+            UI::editable($model, 'Nama_Diagnosa'),
+            UI::editable($model, 'Deskripsi_Diagnosa'),
+            UI::editable($model,'Tindakan_Medis_Yang_Dibutuhkan'),
+            $model->ID_Obat,
+            $model->Jumlah_Obat,
         ];
     }
     use WithAlerts;
@@ -56,7 +62,7 @@ class obatTableView extends TableView
 
         try {
             // Your code that may cause a QueryException
-            $model = obat::where($model)->update($data);
+            $model = diagnosa::where($model)->update($data);
             $this->success();
         } catch (QueryException $e) {
             // Handle the exception here

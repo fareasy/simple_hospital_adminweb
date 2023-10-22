@@ -2,18 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\DeleterawatinapAction;
 use LaravelViews\Views\TableView;
 use App\Models\rawat_inap;
 use App\Models\pasien;
 use LaravelViews\Facades\Header;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\Traits\WithAlerts;
-use App\Actions\DeletedokterAction;
 use Illuminate\Database\QueryException;
+use App\Actions\KeluarrawatinapAction;
 
 
 class rawatinapTableView extends TableView
 {
+    
     /**
      * Sets a model class to get the initial data
      */
@@ -39,6 +41,7 @@ class rawatinapTableView extends TableView
         return [
             Header::title('ID')->sortBy('ID'),
             Header::title('ID Pasien')->sortBy('ID_Pasien'),
+            Header::title('Nama Pasien'),
             Header::title('ID Ruangan')->sortBy('ID_Ruangan'),
             Header::title('Tanggal Masuk')->sortBy('Tanggal_Masuk'),
             Header::title('Tanggal Keluar')->sortBy('Tanggal Keluar')
@@ -52,9 +55,11 @@ class rawatinapTableView extends TableView
      */
     public function row($model): array
     {
+        $pasien = pasien::where('ID', $model->ID_Pasien)->first();
         return [
             $model->ID,
             $model->ID_Pasien,
+            $pasien->Nama,
             UI::editable($model, 'ID_Ruangan'),
             $model->Tanggal_Masuk,
             $model->Tanggal_Keluar
@@ -80,7 +85,9 @@ class rawatinapTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new DeletedokterAction
+            new KeluarrawatinapAction,
+            new DeleterawatinapAction,
         ];
+        
     }
 }

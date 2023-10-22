@@ -56,9 +56,15 @@
                 </a>
               </li>
               <li>
-                <a class="text-white" href="transaksi">
+                <a class="text-white" href="daftar_tagihan">
                     <i class="bi bi-bank2 mr-2"></i>
-                  Pembayaran
+                  Daftar Tagihan
+                </a>
+              </li>
+              <li>
+                <a class="text-white" href="tagihan">
+                    <i class="bi bi-bank2 mr-2"></i>
+                  Jumlah Tagihan
                 </a>
               </li>
             </div>

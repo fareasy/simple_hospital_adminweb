@@ -2,23 +2,33 @@
 
 namespace App\Http\Livewire;
 
-use LaravelViews\Views\TableView;
-use App\Models\obat;
+use App\Actions\DeleteDokterAction;
+use App\Actions\lunasAction;
+use App\Models\pasien;
+use App\Models\tagihan;
+use Illuminate\Database\QueryException;
 use LaravelViews\Facades\Header;
 use LaravelViews\Facades\UI;
+use LaravelViews\Views\TableView;
 use LaravelViews\Views\Traits\WithAlerts;
-use App\Actions\DeletedokterAction;
-use Illuminate\Database\QueryException;
 
-class obatTableView extends TableView
+class tagihanTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = obat::class;
+    protected $model = tagihan::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Obat','Deskripsi_Obat'];
+    public $searchBy = ['ID','ID_Pasien'];
+    /*
+    protected function filters()
+    {
+        return [
+            new Filterspesialisasiperawat,
+        ];
+    }
+    */
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -29,9 +39,11 @@ class obatTableView extends TableView
     {
         return [
             Header::title('ID')->sortBy('ID'),
-            Header::title('Nama Obat')->sortBy('Nama_Obat'),
-            Header::title('Deskripsi Obat')->sortBy('Deskripsi_Obat'),
-            Header::title('Harga')->sortBy('Harga')
+            Header::title('ID Pasien')->sortBy('ID_Pasien'),
+            'Nama Pasien',
+            Header::title('Tanggal_Transaksi')->sortBy('Tanggal_Transaksi'),
+            Header::title('Jumlah_Transaksi')->sortBy('Jumlah_Transaksi'),
+Header::title('Status')->sortBy('Status'),
     ];
     }
 
@@ -42,11 +54,15 @@ class obatTableView extends TableView
      */
     public function row($model): array
     {
+        $pasien = pasien::where('ID', $model->ID_Pasien)->first();
+        $status=($model->Status == 'Belum lunas')?UI::badge($model->Status, 'danger'):UI::badge($model->Status, 'success');
         return [
             $model->ID,
-            UI::editable($model, 'Nama_Obat'),
-            UI::editable($model, 'Deskripsi_Obat'),
-            UI::editable($model, 'Harga')
+            $model->ID_Pasien,
+            $pasien->Nama,
+            $model->Tanggal_Transaksi,
+            $model->Jumlah_Transaksi,
+            $status
         ];
     }
     use WithAlerts;
@@ -56,7 +72,7 @@ class obatTableView extends TableView
 
         try {
             // Your code that may cause a QueryException
-            $model = obat::where($model)->update($data);
+            $model = tagihan::where($model)->update($data);
             $this->success();
         } catch (QueryException $e) {
             // Handle the exception here
@@ -69,7 +85,8 @@ class obatTableView extends TableView
     protected function actionsByRow()
     {
         return [
-            new DeletedokterAction
+            new lunasAction,
+            new DeleteDokterAction
         ];
     }
 }

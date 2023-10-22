@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ruangan extends Model
+class spesialisasi_perawat extends Model
 {
     use HasFactory;
-    protected $table = 'ruangan';
-    protected $fillable=['ID','Jenis_Ruangan','Kapasitas_Ruangan','Status','Harga'];
+    protected $table = 'spesialisasi_perawat';
+    protected $fillable=['ID','Bidang_Spesialisasi'];
     public $timestamps = false;
     protected $primaryKey = 'ID';
 }

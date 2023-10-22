@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ruangan extends Model
+class daftar_tagihan extends Model
 {
     use HasFactory;
-    protected $table = 'ruangan';
-    protected $fillable=['ID','Jenis_Ruangan','Kapasitas_Ruangan','Status','Harga'];
+    protected $table = 'daftar_tagihan';
+    protected $fillable=['ID','ID_Pasien','ID_Rawat_Inap','ID_Booking','Harga',
+    'Harga'];
     public $timestamps = false;
     protected $primaryKey = 'ID';
 }

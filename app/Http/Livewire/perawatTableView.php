@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use LaravelViews\Views\TableView;
 use App\Models\perawat;
+use App\Models\spesialisasi_perawat;
 use LaravelViews\Facades\Header;
 use App\Filters\Filterspesialisasiperawat;
 use LaravelViews\Facades\UI;
@@ -19,15 +20,15 @@ class perawatTableView extends TableView
     protected $model = perawat::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Perawat','Bidang_Spesialisasi'];
-
+    public $searchBy = ['ID','Nama_Perawat'];
+    /*
     protected function filters()
     {
         return [
             new Filterspesialisasiperawat,
         ];
     }
-
+    */
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -43,7 +44,7 @@ class perawatTableView extends TableView
             Header::title('Jenis Kelamin')->sortBy('Jenis_Kelamin'),
         'Alamat',
         'No HP',
-        Header::title('Bidang Spesialisasi')->sortBy('Bidang_Spesialisasi')
+        Header::title('Bidang Spesialisasi')
     ];
     }
 
@@ -54,6 +55,7 @@ class perawatTableView extends TableView
      */
     public function row($model): array
     {
+        $spesialisasi = spesialisasi_perawat::where('ID', $model->ID_Spesialisasi)->first();
         return [
             $model->ID,
             UI::editable($model, 'Nama_Perawat'),
@@ -61,7 +63,7 @@ class perawatTableView extends TableView
             $model->Jenis_Kelamin,
             UI::editable($model, 'Alamat'),
             UI::editable($model, 'No_HP'),
-            $model->Bidang_Spesialisasi
+            $spesialisasi->Bidang_Spesialisasi
         ];
     }
     use WithAlerts;

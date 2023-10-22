@@ -42,7 +42,8 @@ class ruanganTableView extends TableView
             Header::title('ID Ruangan')->sortBy('ID'),
             Header::title('Jenis Ruangan')->sortBy('Jenis_Ruangan'),
             Header::title('Kapasitas')->sortBy('Kapasitas_Ruangan'),
-            Header::title('Status')->sortBy('Status')
+            Header::title('Status')->sortBy('Status'),
+            Header::title('Harga')->sortBy('Harga')
     ];
     }
 
@@ -58,7 +59,8 @@ class ruanganTableView extends TableView
             $model->ID,
             $model->Jenis_Ruangan,
             UI::editable($model, 'Kapasitas_Ruangan'),
-            $status
+            $status,
+            UI::editable($model, 'Harga'),
         ];
     }
 

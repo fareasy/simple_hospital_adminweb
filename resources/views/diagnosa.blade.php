@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Test</title>
+        <title>Diagnosa</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -45,12 +45,7 @@
         </style>
     </head>
     <body>
-      @include('sidebar')
-      @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+    @include('sidebar')
           <section class="p-4" id="main-content">
             <button class="btn P-4" id="button-toggle" style="color:white;background-color: #5F8D4E">
               <i class="bi bi-list"></i>
@@ -58,55 +53,65 @@
           </section>
           <section class="container-fluid overflow-hidden p-5">
             <div class="row align-items-center">
-            <h1 class='m-3 col' style="font-size: 36px">Daftar Rawat Inap</h1>
+            <h1 class='m-3 col' style="font-size: 36px">Daftar Diagnosa</h1>
             <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="create-form" class="btn col-auto btn-sm h-25 w-23 text-nowrap"style="background-color: #5F8D4E;color:white">
             <i class="bi bi-person-fill-add mr-2"></i>
             Tambah Baru</button>
             </div>
             <div>
             @csrf
-                @livewire('rawatinap-table-view')
-                @csrf
+                @livewire('diagnosa-table-view')
             </div>
+              <script>
+              Livewire.onPageExpired((response, message) => {
+	location.reload()
+})
+            </script>
           </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah rawat inap baru</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah diagnosa baru</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="container-fluid" method="post" action="{{route('rawatinap.add')}}">
+        <form class="container-fluid" method="post" action="{{route('diagnosa.add')}}">
           @csrf
           <div class="row">
             <div class="form-group col">
-              <label for="ID_Pasien">Nama Pasien</label>
-              <select name="ID_Pasien" class="form-control">
-                @foreach($pasien_id as $ID => $Nama)
-                    <option value="{{ $ID }}">{{ $ID }}, {{ $Nama }}</option>
-                @endforeach
-            </select>
+              <label for="Tanggal_Diagnosa">Tanggal Diagnosa</label>
+              <input type="date" class="form-control" id="Tanggal_Diagnosa" name="Tanggal_Diagnosa"/>
             </div>
             <div class="form-group col">
-              <label for="ID_Ruangan">Nama Ruangan</label>
-              <select name="ID_Ruangan" class="form-control">
-                @foreach($ruangan_id as $ID => $value)
-                    <option value="{{ $ID }}">{{ $ID }}, {{ $value }}</option>
-                @endforeach
-            </select>
+              <label for="Nama_Diagnosa">Nama Diagnosa</label>
+              <input type="text" class="form-control" id="Nama_Diagnosa" name="Nama_Diagnosa"/>
             </div>
           </div>
           <div class="row mt-3">
-          <div class="form-group col">
-            <label for="Tanggal_Masuk">Tanggal Masuk</label>
-            <input type="date" class="form-control" id="Tanggal_Masuk" name="Tanggal_Masuk" placeholder="YYYY-MM-DD" required pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
-          </div>
             <div class="form-group col">
-            <label for="Tanggal_Keluar">Tanggal Keluar</label>
-              <input type="date" class="form-control" id="Tanggal_Keluar" name="Tanggal_Keluar" placeholder="YYYY-MM-DD" pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" title="Enter a date in this format YYYY-MM-DD"/>
+              <label for="Deskripsi_Diagnosa">Deskripsi Diagnosa</label>
+              <input type="text" class="form-control" id="Deskripsi_Diagnosa" name="Deskripsi_Diagnosa"/>
+            </div>
+            <div class="form-group col">
+              <label for="Tindakan_Medis_Yang_Dibutuhkan">Tindakan Medis Yang Dibutuhkan</label>
+              <input type="text" class="form-control" id="Tindakan_Medis_Yang_Dibutuhkan" name="Tindakan_Medis_Yang_Dibutuhkan"/>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group col">
+              <label for="ID_Obat">Obat</label>
+              <select name="ID_Obat" id="ID_Obat" class="form-control">
+                @foreach($obat as $ID => $Nama_Obat)
+                    <option value="{{ $ID }}">{{ $ID }}. {{ $Nama_Obat }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="Jumlah_Obat">Jumlah Obat</label>
+              <input type="number" id="Jumlah_Obat" name="Jumlah_Obat" class="form-control"/>
             </div>
           </div>
           <button type="submit" class="btn form-control mt-3"style="background-color: #5F8D4E;color:white">Submit</button>

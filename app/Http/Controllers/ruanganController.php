@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ruangan;
+use App\Events\statusruanganEvent;
 
 class ruanganController extends Controller
 {
     //
     public function index()
     {
+        event(new statusruanganEvent());
         $ruangan=ruangan::class;
         return view('ruangan',
     [
@@ -20,10 +22,10 @@ class ruanganController extends Controller
     {
         // Validate the form data
         $request->validate([
-            'ID' => 'required|max:15',
             'Jenis_Ruangan' => 'required|string|max:50',
             'Kapasitas_Ruangan' => 'required',
             'Status' => 'required',
+            'Harga' => 'required',
         ]);
 
         // Save the form data to the database

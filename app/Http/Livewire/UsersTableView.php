@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\dokter;
+use App\Models\spesialisasi_dokter;
 use LaravelViews\Views\TableView;
 use LaravelViews\Facades\Header;
 use App\Filters\Filterspesialisasidokter;
@@ -19,13 +20,7 @@ class UsersTableView extends TableView
     protected $model = dokter::class;
     protected $primaryKey = 'ID';
     protected $paginate = 20;
-    public $searchBy = ['ID','Nama_Dokter','Bidang_Spesialisasi'];
-    protected function filters()
-    {
-        return [
-            new Filterspesialisasidokter,
-        ];
-    }
+    public $searchBy = ['ID','Nama_Dokter'];
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -41,7 +36,7 @@ class UsersTableView extends TableView
             Header::title('Jenis Kelamin')->sortBy('Jenis_Kelamin'),
         'Alamat',
         'No HP',
-        Header::title('Bidang Spesialisasi')->sortBy('Bidang_Spesialisasi')
+        'Bidang Spesialisasi'
     ];
         
     }
@@ -53,6 +48,7 @@ class UsersTableView extends TableView
      */
     public function row($model): array
     {
+        $spesialisasi = spesialisasi_dokter::where('ID', $model->ID_Spesialisasi)->first();
         return [
             $model->ID,
             UI::editable($model, 'Nama_Dokter'),
@@ -60,14 +56,13 @@ class UsersTableView extends TableView
             $model->Jenis_Kelamin,
             UI::editable($model, 'Alamat'),
             UI::editable($model, 'No_HP'),
-            $model->Bidang_Spesialisasi
+            $spesialisasi->Bidang_Spesialisasi
         ];
     }
     use WithAlerts;
     
     public function update($model, $data)
     {
-
         try {
             // Your code that may cause a QueryException
             $model = dokter::where($model)->update($data);
