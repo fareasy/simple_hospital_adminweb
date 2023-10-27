@@ -316,7 +316,7 @@ CREATE TABLE `ruangan` (
 
 LOCK TABLES `ruangan` WRITE;
 /*!40000 ALTER TABLE `ruangan` DISABLE KEYS */;
-INSERT INTO `ruangan` VALUES (1,'Ruang PICU',10,'Penuh',500000),(2,'Ruang Cendrawasih',23,'Tersedia',450000),(3,'Ruang Melati',32,'Tersedia',400000),(4,'Ruang Kutilang',50,'Tersedia',350000),(5,'Ruang NAPZA',10,'Tersedia',500000);
+INSERT INTO `ruangan` VALUES (1,'Ruang PICU',10,'Tersedia',500000),(2,'Ruang Cendrawasih',23,'Tersedia',450000),(3,'Ruang Melati',32,'Tersedia',400000),(4,'Ruang Kutilang',50,'Tersedia',350000),(5,'Ruang NAPZA',10,'Tersedia',500000);
 /*!40000 ALTER TABLE `ruangan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,6 +396,31 @@ LOCK TABLES `tagihan` WRITE;
 INSERT INTO `tagihan` VALUES (2,'300000000000003','2023-10-22','2000000','Lunas'),(6,'300000000000006',NULL,'265000','Belum lunas'),(7,'300000000000077',NULL,'500000','Belum lunas');
 /*!40000 ALTER TABLE `tagihan` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(12) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','$2y$10$l7DkVSp.vR48I5uAm1PpVO6z3/AG4YPwD28FFBLrV5rkPuJkt2dfS');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -406,4 +431,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-22 14:19:28
+-- Dump completed on 2023-10-27  7:12:53
